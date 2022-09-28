@@ -1,0 +1,40 @@
+{
+    "taskGroups": [
+        {
+            "taskSpec": {
+                "computeResource": {
+                    "cpuMilli": 500,
+                    "memoryMib": 20
+                },
+                "maxRetryCount": 1,
+                "maxRunDuration": "3600s",
+                "volumes": [
+                    {
+                        "gcs": {
+                            "remotePath": "$BUCKET_NAME"
+                        },
+                        "mountPath": "/mnt/share"
+                    }
+                ]
+
+            },
+            "taskCount": $TASK_COUNT,
+            "parallelism": 1
+        }
+    ],
+    "allocationPolicy": {
+        "instances": [
+            {
+                "policy": {"machineType": "e2-standard-4"}
+            }
+        ]
+    },
+    "labels": {
+        "department": "jspp",
+        "env": "testing"
+    },
+    "logsPolicy": {
+        "destination": "CLOUD_LOGGING"
+    }
+}
+
